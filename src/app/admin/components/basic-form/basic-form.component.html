@@ -10,30 +10,39 @@
       formControlName="namee"/>
     <button (click)="getValueName()" [disabled]="nameField.invalid">Obtener valor</button>
   </p>
-
-  <p class="messages" [class.active]="isNameFieldInvalid">
-    <strong *ngIf="nameField.touched && nameField.hasError('required')">El campo es requerido</strong>
-    <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
-    <!--1.- Para la parte de maxLength queda mejor que se coloque dirty en lugar de touched, esto porque si el usuario excede los 10 caracteres
-      necesita dar click en otro lugar para que se muestre el mensaje, con dirty se muestra automáticamente-->
-    <!--2.-  es una maravillosa técnica y es totalmente valida, una de las razones por que las a veces no uso dirty es que el usuario
-      puede no terminar de digitar un campo y ya le estoy mostrando error, por ejemplo en un correo, puede que el usuario vaya a la mitad
-      y ya le estoy diciendo que esta en un error.-->
-  </p>
+  <div class="messages" [class.active]="isNameFieldInvalid">
+    <p>
+      <strong *ngIf="nameField.hasError('required')">El campo es requerido</strong>
+      <strong *ngIf="nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
+      <strong *ngIf="nameField.hasError('pattern')">No debe contener caracteres especiales</strong>
+      <!--1.- Para la parte de maxLength queda mejor que se coloque dirty en lugar de touched, esto porque si el usuario excede los 10 caracteres
+        necesita dar click en otro lugar para que se muestre el mensaje, con dirty se muestra automáticamente-->
+      <!--2.-  es una maravillosa técnica y es totalmente valida, una de las razones por que las a veces no uso dirty es que el usuario
+        puede no terminar de digitar un campo y ya le estoy mostrando error, por ejemplo en un correo, puede que el usuario vaya a la mitad
+        y ya le estoy diciendo que esta en un error.-->
+    </p>
+  </div>
 
   <p>
     Email: {{ emailField.value }}
     <input type="email" formControlName="email"/>
   </p>
+  <div class="messages" [class.active]="emailField.touched && emailField.invalid">
+    <p>
+      <strong *ngIf="emailField.hasError('required')">El campo es requerido</strong>
+      <strong *ngIf="emailField.hasError('email')">Esto no es un email</strong>
+    </p>
+  </div>
 
   <p>
     Phone: {{ phoneField.value }}
     <input type="tel" formControlName="phone"/>
   </p>
-
-  <p class="messages" [class.active]="phoneField.touched && phoneField.invalid">
-    <strong *ngIf="phoneField.touched && phoneField.hasError('required')">El campo es requerido</strong>
-  </p>
+  <div class="messages" [class.active]="phoneField.touched && phoneField.invalid">
+    <p>
+      <strong *ngIf="phoneField.hasError('required')">El campo es requerido</strong>
+    </p>
+  </div>
 
   <p>
     Color: {{ colorField.value }}
@@ -49,6 +58,13 @@
     Age: {{ ageField.value }}
     <input type="number" formControlName="age"/>
   </p>
+  <div class="messages" [class.active]="ageField.touched && ageField.invalid">
+    <p>
+      <strong *ngIf="ageField.hasError('required')">El campo es requerido</strong>
+      <strong *ngIf="ageField.hasError('min')">Debes ser mayor de edad</strong>
+      <strong *ngIf="ageField.hasError('max')">Debes ser menor de 100 años</strong>
+    </p>
+  </div>
 
   <p>
     Category: {{ categoryField.value }}
@@ -74,6 +90,11 @@
     agree: {{ agreeField.value }}
     <input type="checkbox" formControlName="agree">
   </p>
+  <div class="messages" [class.active]="agreeField.touched && agreeField.invalid">
+    <p>
+      <strong *ngIf="agreeField.hasError('required')">Tienes que aceptar los terminos</strong>
+    </p>
+  </div>
 
   <p>
     Gender: {{ genderField.value }}
