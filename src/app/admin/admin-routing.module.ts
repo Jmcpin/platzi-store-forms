@@ -21,10 +21,10 @@ const routes: Routes = [
         path: 'categories',
         loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
       },
-        {
-          path: 'basic',
-          component: BasicFormComponent
-        }
+      {
+        path: 'basic',
+        component: BasicFormComponent
+      }
     ]
   }
 ];

@@ -1,104 +1,115 @@
-<p>
-  Name: {{ nameField.value }} - Valid: {{ nameField.valid }} - Invalid: {{ nameField.invalid }}
-  <input
-    [class.is-valid]="isNameFieldValid()"
-    [class.is-invalid]="isNameFieldInvalid()"
-    type="text"
-    [formControl]="nameField"/>
-  <button (click)="getValueName()" [disabled]="nameField.invalid">Obtener valor</button>
-</p>
 
-<p class="messages" [class.active]="isNameFieldInvalid()">
-  <strong *ngIf="nameField.touched && nameField.hasError('required')">El campo es requerido</strong>
-  <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
-  <!--1.- Para la parte de maxLength queda mejor que se coloque dirty en lugar de touched, esto porque si el usuario excede los 10 caracteres
-    necesita dar click en otro lugar para que se muestre el mensaje, con dirty se muestra automáticamente-->
-  <!--2.-  es una maravillosa técnica y es totalmente valida, una de las razones por que las a veces no uso dirty es que el usuario
-    puede no terminar de digitar un campo y ya le estoy mostrando error, por ejemplo en un correo, puede que el usuario vaya a la mitad
-    y ya le estoy diciendo que esta en un error.-->
-</p>
+<form [formGroup]="formulario" (ngSubmit)="save($event)">
 
-<p>
-  Email: {{ emailField.value }}
-  <input type="email" [formControl]="emailField"/>
-</p>
+  <p>
+    Name: {{ nameField.value }} - Valid: {{ nameField.valid }} - Invalid: {{ nameField.invalid }}
+    <input
+      [class.is-valid]="isNameFieldValid"
+      [class.is-invalid]="isNameFieldInvalid"
+      type="text"
+      formControlName="namee"/>
+    <button (click)="getValueName()" [disabled]="nameField.invalid">Obtener valor</button>
+  </p>
 
-<p>
-  Phone: {{ phoneField.value }}
-  <input type="tel" [formControl]="phoneField"/>
-</p>
+  <p class="messages" [class.active]="isNameFieldInvalid">
+    <strong *ngIf="nameField.touched && nameField.hasError('required')">El campo es requerido</strong>
+    <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
+    <!--1.- Para la parte de maxLength queda mejor que se coloque dirty en lugar de touched, esto porque si el usuario excede los 10 caracteres
+      necesita dar click en otro lugar para que se muestre el mensaje, con dirty se muestra automáticamente-->
+    <!--2.-  es una maravillosa técnica y es totalmente valida, una de las razones por que las a veces no uso dirty es que el usuario
+      puede no terminar de digitar un campo y ya le estoy mostrando error, por ejemplo en un correo, puede que el usuario vaya a la mitad
+      y ya le estoy diciendo que esta en un error.-->
+  </p>
 
-<p>
-  Color: {{ colorField.value }}
-  <input type="color" [formControl]="colorField"/>
-</p>
+  <p>
+    Email: {{ emailField.value }}
+    <input type="email" formControlName="email"/>
+  </p>
 
-<p>
-  Date: {{ dateField.value }}
-  <input type="date" [formControl]="dateField"/>
-</p>
+  <p>
+    Phone: {{ phoneField.value }}
+    <input type="tel" formControlName="phone"/>
+  </p>
 
-<p>
-  Age: {{ numberField.value }}
-  <input type="number" [formControl]="numberField"/>
-</p>
+  <p class="messages" [class.active]="phoneField.touched && phoneField.invalid">
+    <strong *ngIf="phoneField.touched && phoneField.hasError('required')">El campo es requerido</strong>
+  </p>
 
-<p>
-  Category: {{ categoryField.value }}
-  <select [formControl]="categoryField">
-    <option value="category-1">Categoria 1</option>
-    <option value="category-2">Categoria 2</option>
-    <option value="category-3">Categoria 3</option>
-    <option value="category-4">Categoria 4</option>
-  </select>
-</p>
+  <p>
+    Color: {{ colorField.value }}
+    <input type="color" formControlName="color"/>
+  </p>
 
-<p>
-  Tags: {{ tagField.value }}
-  <select [formControl]="tagField" multiple size="2">
-    <option value="tag-1">Tag 1</option>
-    <option value="tag-2">Tag 2</option>
-    <option value="tag-3">Tag 3</option>
-    <option value="tag-4">Tag 4</option>
-  </select>
-</p>
+  <p>
+    Date: {{ dateField.value }}
+    <input type="date" formControlName="date"/>
+  </p>
 
-<p>
-  agree: {{ agreeField.value }}
-  <input type="checkbox" [formControl]="agreeField">
-</p>
+  <p>
+    Age: {{ ageField.value }}
+    <input type="number" formControlName="age"/>
+  </p>
 
-<p>
-  Gender: {{ genderField.value }}
-  <label>
-    <input name="gender" type="radio" [formControl]="genderField" value="male">
-    male
-  </label>
-  <label>
-    <input name="gender" type="radio" [formControl]="genderField" value="female">
-    female
-  </label>
-  <label>
-    <input name="gender" type="radio" [formControl]="genderField" value="Other">
-    Other
-  </label>
-</p>
+  <p>
+    Category: {{ categoryField.value }}
+    <select formControlName="category">
+      <option value="category-1">Categoria 1</option>
+      <option value="category-2">Categoria 2</option>
+      <option value="category-3">Categoria 3</option>
+      <option value="category-4">Categoria 4</option>
+    </select>
+  </p>
 
-<p>
-  Zone: {{ zoneField.value }}
-  <label>
-    <input name="zone" type="radio" [formControl]="zoneField" value="zone-1">
-    Zone 1
-  </label>
-  <label>
-    <input name="zone" type="radio" [formControl]="zoneField" value="zone-2">
-    Zone 2
-  </label>
-  <label>
-    <input name="zone" type="radio" [formControl]="zoneField" value="zone-3">
-    Zone 3
-  </label>
-</p>
+  <p>
+    Tags: {{ tagField.value }}
+    <select formControlName="tag" multiple size="2">
+      <option value="tag-1">Tag 1</option>
+      <option value="tag-2">Tag 2</option>
+      <option value="tag-3">Tag 3</option>
+      <option value="tag-4">Tag 4</option>
+    </select>
+  </p>
+
+  <p>
+    agree: {{ agreeField.value }}
+    <input type="checkbox" formControlName="agree">
+  </p>
+
+  <p>
+    Gender: {{ genderField.value }}
+    <label>
+      <input name="gender" type="radio" formControlName="gender" value="male">
+      male
+    </label>
+    <label>
+      <input name="gender" type="radio" formControlName="gender" value="female">
+      female
+    </label>
+    <label>
+      <input name="gender" type="radio" formControlName="gender" value="Other">
+      Other
+    </label>
+  </p>
+
+  <p>
+    Zone: {{ zoneField.value }}
+    <label>
+      <input name="zone" type="radio" formControlName="zone" value="zone-1">
+      Zone 1
+    </label>
+    <label>
+      <input name="zone" type="radio" formControlName="zone" value="zone-2">
+      Zone 2
+    </label>
+    <label>
+      <input name="zone" type="radio" formControlName="zone" value="zone-3">
+      Zone 3
+    </label>
+  </p>
+
+  <button type="submit">Enviar</button>
+
+</form>
 
 <hr>
 <p>
