@@ -1,26 +1,45 @@
 
 <form [formGroup]="formulario" (ngSubmit)="save($event)">
 
-  <p>
-    Name: {{ nameField.value }} - Valid: {{ nameField.valid }} - Invalid: {{ nameField.invalid }}
-    <input
-      [class.is-valid]="isNameFieldValid"
-      [class.is-invalid]="isNameFieldInvalid"
-      type="text"
-      formControlName="namee"/>
-    <button (click)="getValueName()" [disabled]="nameField.invalid">Obtener valor</button>
-  </p>
-  <div class="messages" [class.active]="isNameFieldInvalid">
+  <div formGroupName="fullname">
     <p>
-      <strong *ngIf="nameField.hasError('required')">El campo es requerido</strong>
-      <strong *ngIf="nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
-      <strong *ngIf="nameField.hasError('pattern')">No debe contener caracteres especiales</strong>
-      <!--1.- Para la parte de maxLength queda mejor que se coloque dirty en lugar de touched, esto porque si el usuario excede los 10 caracteres
-        necesita dar click en otro lugar para que se muestre el mensaje, con dirty se muestra automáticamente-->
-      <!--2.-  es una maravillosa técnica y es totalmente valida, una de las razones por que las a veces no uso dirty es que el usuario
-        puede no terminar de digitar un campo y ya le estoy mostrando error, por ejemplo en un correo, puede que el usuario vaya a la mitad
-        y ya le estoy diciendo que esta en un error.-->
+      Name: {{ nameField.value }} - Valid: {{ nameField.valid }} - Invalid: {{ nameField.invalid }}
+      <input
+        [class.is-valid]="isNameFieldValid"
+        [class.is-invalid]="isNameFieldInvalid"
+        type="text"
+        formControlName="namee"/>
+      <button (click)="getValueName()" [disabled]="nameField.invalid">Obtener valor</button>
     </p>
+    <div class="messages" [class.active]="isNameFieldInvalid">
+      <p>
+        <strong *ngIf="nameField.hasError('required')">El campo es requerido</strong>
+        <strong *ngIf="nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
+        <strong *ngIf="nameField.hasError('pattern')">No debe contener caracteres especiales</strong>
+        <!--1.- Para la parte de maxLength queda mejor que se coloque dirty en lugar de touched, esto porque si el usuario excede los 10 caracteres
+          necesita dar click en otro lugar para que se muestre el mensaje, con dirty se muestra automáticamente-->
+        <!--2.-  es una maravillosa técnica y es totalmente valida, una de las razones por que las a veces no uso dirty es que el usuario
+          puede no terminar de digitar un campo y ya le estoy mostrando error, por ejemplo en un correo, puede que el usuario vaya a la mitad
+          y ya le estoy diciendo que esta en un error.-->
+      </p>
+    </div>
+
+    <p>
+      Last: {{ lastField.value }} - Valid: {{ lastField.valid }} - Invalid: {{ lastField.invalid }}
+      <input
+        [class.is-valid]="lastField.touched && lastField.valid"
+        [class.is-invalid]="lastField.touched && lastField.invalid"
+        type="text"
+        formControlName="last"/>
+    </p>
+    <div class="messages" [class.active]="lastField.touched && lastField.invalid">
+      <p>
+        <strong *ngIf="nameField.hasError('required')">El campo es requerido</strong>
+        <strong *ngIf="nameField.hasError('maxlength')">El campo debe tener máximo 10 caracteres</strong>
+        <strong *ngIf="nameField.hasError('pattern')">No debe contener caracteres especiales</strong>
+      </p>
+    </div>
+
   </div>
 
   <p>

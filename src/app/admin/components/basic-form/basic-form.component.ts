@@ -18,9 +18,9 @@ export class BasicFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nameField.valueChanges.subscribe(data => { //v6. Obtiene los valores de un input form control en tiempo real
+    /*this.nameField.valueChanges.subscribe(data => { //v6. Obtiene los valores de un input form control en tiempo real
       console.log(data);
-    });
+    });*/
     /*this.formulario.valueChanges.subscribe(values => {
       console.log(values);// se suscribe el formulario y escucha todos los inputs
     })*/
@@ -28,7 +28,10 @@ export class BasicFormComponent implements OnInit {
 
   private buildFormm() {
     this.formulario = this.formBuilder.group({
-      namee: ['',[Validators.required, Validators.maxLength(10), Validators.pattern(/^[Aa-zA-ZáéíóúÁÉÍÓÚÑñ ]+$/)]],
+      fullname:  this.formBuilder.group({
+        namee: ['',[Validators.required, Validators.maxLength(10), Validators.pattern(/^[Aa-zA-ZáéíóúÁÉÍÓÚÑñ ]+$/)]],
+        last: ['',[Validators.required, Validators.maxLength(10), Validators.pattern(/^[Aa-zA-ZáéíóúÁÉÍÓÚÑñ ]+$/)]]
+      }),
       email: ['',[Validators.required, Validators.email]],
       phone: ['', Validators.required],
       color: ['#000000'],
@@ -82,7 +85,11 @@ export class BasicFormComponent implements OnInit {
   }
 
   get nameField() {
-    return this.formulario.get('namee');
+    return this.formulario.get('fullname.namee');
+  }
+
+  get lastField() {
+    return this.formulario.get('fullname.last');
   }
 
   get isNameFieldValid() {
