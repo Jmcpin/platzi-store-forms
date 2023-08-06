@@ -46,6 +46,18 @@ export class RegisterComponent implements OnInit {
     }, {
       validators: [MyValidators.matchPasswords]
     });
+
+    this.typeField.valueChanges.subscribe(data => { //Lo que va hacer es que si el campo type = company entonces va a ser requrido el campo companyName
+      console.log(data);
+      if(data === 'company'){
+        this.companyNameField.setValidators([Validators.required]);
+      }else {
+        this.companyNameField.setValidators(null);
+      }
+      this.companyNameField.updateValueAndValidity(); // Por ultimo se debe se actualizar el valor y validar, es decir, para que validators valide el campo de nuevo
+                                                      // al realizar esta acción de validar desde valueschanes
+    });
+
   }
 
   get passwordField() {
@@ -54,6 +66,14 @@ export class RegisterComponent implements OnInit {
 
   get confirmPasswordField() {
     return this.form.get('confirmPassword');
+  }
+
+  get typeField(){
+    return this.form.get('type');
+  }
+
+  get companyNameField(){
+    return this.form.get('companyName');
   }
 
 }
