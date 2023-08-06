@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../../../core/services/auth.service';
-import {  MyValidators } from './../../../utils/validators';
+import { MyValidators } from './../../../utils/validators';
 
 @Component({
   selector: 'app-register',
@@ -40,11 +40,20 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required, MyValidators.validPassword]],
+      confirmPassword: ['',Validators.required],
+      type: ['company', Validators.required],
+      companyName: ['', Validators.required]
+    }, {
+      validators: [MyValidators.matchPasswords]
     });
   }
 
   get passwordField() {
     return this.form.get('password');
+  }
+
+  get confirmPasswordField() {
+    return this.form.get('confirmPassword');
   }
 
 }

@@ -116,6 +116,27 @@
         </mat-radio-group>
       </div>
 
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Numero Inicio</mat-label>
+            <input placeholder="Min: 0" formControlName="inicio" matInput type="number">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Numero Fin</mat-label>
+            <input placeholder="Max: 100" formControlName="fin" matInput type="number">
+          </mat-form-field>
+          <div *ngIf="finField.touched && formulario.errors">
+            <mat-error *ngIf="formulario.hasError('error_rangoo')">El rango debe ser de 0 a 100</mat-error>
+          </div>
+        </div>
+      </div>
+
       <div name="colorr">
         <p>
           Color: {{ colorField.value }}

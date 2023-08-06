@@ -21,14 +21,37 @@
           </mat-form-field>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs">
           <mat-form-field>
             <mat-label>Confirm Password</mat-label>
-            <input placeholder="password" formControlName="password" matInput type="password">
+            <input placeholder="password" formControlName="confirmPassword" matInput type="password">
+          </mat-form-field>
+          <div *ngIf="confirmPasswordField.touched && form.errors">
+            <mat-error *ngIf="form.hasError('match_password')">Las contraseñas no coindicen</mat-error>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+            <mat-radio-group formControlName="type" aria-label="Seleciona una opción">
+              <mat-radio-button value="company">Company</mat-radio-button>
+              <mat-radio-button value="customer">Customer</mat-radio-button>
+            </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Company</mat-label>
+            <input matInput type="text" formControlName="companyName">
           </mat-form-field>
         </div>
       </div>
+
     </mat-card-content>
     <mat-card-actions>
       <button [disabled]="form.invalid" mat-raised-button type="submit">Registro</button>

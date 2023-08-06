@@ -28,6 +28,15 @@ export class MyValidators {
     return null;
   }
 
+  static rango(formularioo: AbstractControl){
+    const inicio = formularioo.get('inicio').value;
+    const fin = formularioo.get('fin').value;
+    if((inicio < 0 || inicio > 100) || (fin < 0 || fin > 100)){
+      return { error_rangoo: true };
+    }
+    return null;
+  }
+
 }
 
 function containsNumber(value: string){

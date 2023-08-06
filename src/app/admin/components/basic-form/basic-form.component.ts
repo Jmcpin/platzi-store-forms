@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { MyValidators } from './../../../utils/validators';
 
 @Component({
   selector: 'app-basic-form',
@@ -42,6 +43,10 @@ export class BasicFormComponent implements OnInit {
       agree: [false, Validators.requiredTrue],
       gender: [''],
       zone: [''],
+      inicio: [],
+      fin: []
+    }, {
+      validators: MyValidators.rango
     });
   }
 
@@ -138,6 +143,14 @@ export class BasicFormComponent implements OnInit {
 
   get zoneField() {
     return this.formulario.get('zone');
+  }
+
+  get inicioField(){
+    return this.formulario.get('inicio');
+  }
+
+  get finField(){
+    return this.formulario.get('fin');
   }
 
 }
