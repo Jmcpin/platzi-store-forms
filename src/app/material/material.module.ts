@@ -19,6 +19,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSlideToggleModule, _MatSlideToggleRequiredValidatorModule } from '@angular/material/slide-toggle'; //toggle aceptar terminos y cond
+import { MatDatepickerModule } from '@angular/material/datepicker'; //para implementar fechas
+import { MatNativeDateModule } from '@angular/material/core'; //Para utilizar los formatos de fecha nativo de js
 
 @NgModule({
   declarations: [],
@@ -41,7 +44,11 @@ import { MatStepperModule } from '@angular/material/stepper';
     LayoutModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
+    _MatSlideToggleRequiredValidatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -61,7 +68,11 @@ import { MatStepperModule } from '@angular/material/stepper';
     LayoutModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
+    _MatSlideToggleRequiredValidatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

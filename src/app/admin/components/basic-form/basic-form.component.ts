@@ -37,7 +37,7 @@ export class BasicFormComponent implements OnInit {
       color: ['#000000'],
       date: [''],
       age: [18, [Validators.required, Validators.min(18), Validators.max(100)]],
-      category: ['category-3'],
+      category: ['category-3', Validators.required],
       tag: [''],
       agree: [false, Validators.requiredTrue],
       gender: [''],
