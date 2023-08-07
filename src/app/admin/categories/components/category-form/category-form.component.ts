@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { CategoriesService } from './../../../../core/services/categories.service';
+import { Router } from '@angular/router';
+import {} from './../categories/categories.component'
 
 @Component({
   selector: 'app-category-form',
@@ -11,7 +14,9 @@ export class CategoryFormComponent implements OnInit {
   formulario: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private categoriesService: CategoriesService,
+    private router: Router
   ) {
     this.builderFormm();
    }
@@ -27,7 +32,19 @@ export class CategoryFormComponent implements OnInit {
   }
 
   public save(){
-    console.log(this.formulario);
+    if(this.formulario.valid){
+      this.createCategory();
+    }else {
+      this.formulario.markAllAsTouched;
+    }
+  }
+
+  private createCategory(){
+    const data = this.formulario.value;
+    this.categoriesService.createCategory(data).subscribe(rta => {
+      console.log(rta);
+      this.router.navigate(['./admin/categories']);
+    })
   }
 
   get nameField(){

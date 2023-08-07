@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 40px
+}
+
+img {
+  width: 100%;
+}
+
+.mat-card-image{
+  margin: 0px;
+}
